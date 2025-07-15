@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +20,17 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.medilinkapplogin.Database.DBHelper;
 import com.example.medilinkapplogin.userDataModel.dataModel;
 
+import java.util.ArrayList;
+
 public class signUpActivity extends AppCompatActivity {
 
-    EditText signUpName,signUpEmail,signUpPass,signUpPhone,signUpBloodGroup;
+    EditText signUpName,signUpEmail,signUpPass,signUpPhone;
+    Spinner bloodGroupSpiner;
     EditText signUpDist,signUpProfession;
     Button signUpButton;
-    TextView redirectToLoin;
+    TextView redirectToLoin,signUpBloodGroup;
+    ArrayList<String>arrBloodGroupSpinner = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,18 @@ public class signUpActivity extends AppCompatActivity {
         signUpProfession = findViewById(R.id.signUpProfession);
         signUpPass = findViewById(R.id.signUpPass);
         redirectToLoin = findViewById(R.id.redirectToLoin);
+        bloodGroupSpiner = findViewById(R.id.bloodGroupSpiner);
+        arrBloodGroupSpinner.add("O+");
+        arrBloodGroupSpinner.add("A+");
+        arrBloodGroupSpinner.add("B+");
+        arrBloodGroupSpinner.add("AB+");
+        arrBloodGroupSpinner.add("O-");
+        arrBloodGroupSpinner.add("A-");
+        arrBloodGroupSpinner.add("B-");
+        arrBloodGroupSpinner.add("AB-");
+        ArrayAdapter<String>bloodGroupAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrBloodGroupSpinner);
+        bloodGroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bloodGroupSpiner.setAdapter(bloodGroupAdapter);
         redirectToLoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,9 +78,10 @@ public class signUpActivity extends AppCompatActivity {
                 String email = signUpEmail.getText().toString().trim();
                 String phone = signUpPhone.getText().toString().trim();
                 String password = signUpPass.getText().toString().trim();
-                String bloodGroup = signUpBloodGroup.getText().toString().trim();
+                String bloodGroup = bloodGroupSpiner.getSelectedItem().toString().trim();
                 String dist = signUpDist.getText().toString().trim();
                 String profession = signUpProfession.getText().toString().trim();
+
                 dataModel dm = new dataModel();
                 dm.setName(name);
                 dm.setEmail(email);

@@ -13,6 +13,8 @@ import com.example.medilinkapplogin.DBParameters.parameters;
 import com.example.medilinkapplogin.user.userInfo;
 import com.example.medilinkapplogin.userDataModel.dataModel;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
     private Context context;
     public DBHelper(Context context) {
@@ -109,16 +111,39 @@ public class DBHelper extends SQLiteOpenHelper {
         {
             int nameIndex = cursor.getColumnIndexOrThrow("name");
             int phoneIndex = cursor.getColumnIndexOrThrow("phone_no");
+            int bloodGroupIndex = cursor.getColumnIndexOrThrow("blood_group");
 
             String name = cursor.getString(nameIndex);
             String phone = cursor.getString(phoneIndex);
+            String bloodGroup = cursor.getString(bloodGroupIndex);
             cursor.close();
-            return new userInfo(name,email,phone);
+            return new userInfo(name,email,phone,bloodGroup);
         }
         cursor.close();
         return null;
 
 
     }
+    public ArrayList<userInfo> getDonersByBloodGroup(String bloodGroup) {
+        ArrayList<userInfo> doners = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + parameters.USER_INFO_TABLE +
+                        " WHERE " + parameters.KEY_BLOOD_GROUP + " = ?",
+                new String[]{bloodGroup});
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name  = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_NAME));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_EMAIL));
+                String phone = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_PHONE));
+                doners.add(new userInfo(name, email, phone,bloodGroup));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return doners;
+    }
+
 
 }
