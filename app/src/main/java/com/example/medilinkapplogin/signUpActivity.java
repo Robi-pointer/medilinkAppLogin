@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class signUpActivity extends AppCompatActivity {
 
-    EditText signUpName,signUpEmail,signUpPass,signUpPhone;
+    EditText signUpName,signUpEmail,signUpPass,confirmSignUpPass,signUpPhone;
     Spinner bloodGroupSpiner;
     EditText signUpDist,signUpProfession;
     Button signUpButton;
@@ -51,6 +51,7 @@ public class signUpActivity extends AppCompatActivity {
         signUpDist = findViewById(R.id.signUpDist);
         signUpProfession = findViewById(R.id.signUpProfession);
         signUpPass = findViewById(R.id.signUpPass);
+        confirmSignUpPass = findViewById(R.id.confirmSignUpPass);
         redirectToLoin = findViewById(R.id.redirectToLoin);
         bloodGroupSpiner = findViewById(R.id.bloodGroupSpiner);
         arrBloodGroupSpinner.add("O+");
@@ -78,20 +79,27 @@ public class signUpActivity extends AppCompatActivity {
                 String email = signUpEmail.getText().toString().trim();
                 String phone = signUpPhone.getText().toString().trim();
                 String password = signUpPass.getText().toString().trim();
+                String confirmPassword = confirmSignUpPass.getText().toString().trim();
                 String bloodGroup = bloodGroupSpiner.getSelectedItem().toString().trim();
                 String dist = signUpDist.getText().toString().trim();
                 String profession = signUpProfession.getText().toString().trim();
 
-                dataModel dm = new dataModel();
-                dm.setName(name);
-                dm.setEmail(email);
-                dm.setPhone(phone);
-                dm.setPass(password);
-                dm.setBloodGroup(bloodGroup);
-                dm.setDistrict(dist);
-                dm.setProfession(profession);
-                DBHelper dbHelper = new DBHelper(signUpActivity.this);
-                dbHelper.addUserInfo(dm);
+               if(password != null && password.equals(confirmPassword))
+               {
+                   dataModel dm = new dataModel();
+                   dm.setName(name);
+                   dm.setEmail(email);
+                   dm.setPhone(phone);
+                   dm.setPass(password);
+                   dm.setBloodGroup(bloodGroup);
+                   dm.setDistrict(dist);
+                   dm.setProfession(profession);
+                   DBHelper dbHelper = new DBHelper(signUpActivity.this);
+                   dbHelper.addUserInfo(dm);
+               }
+               else {
+                   Toast.makeText(signUpActivity.this, "password and confirm password don't match", Toast.LENGTH_SHORT).show();
+               }
 
 
 

@@ -1,103 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    tools:context=".signUpActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medilink App"
-        android:layout_marginTop="10dp"
-        android:textSize="30sp"
-        android:textColor="#4BD750"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:textSize="30sp"
-        android:layout_marginTop="40dp"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Your Name"
-        android:ems="15"
-        android:id="@+id/signUpName"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Your Email"
-        android:ems="15"
-        android:id="@+id/signUpEmail"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Your Password"
-        android:ems="15"
-        android:id="@+id/signUpPass"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Your Phone Number"
-        android:ems="15"
-        android:id="@+id/signUpPhone"
-        android:layout_marginTop="10dp"/>
-    <TextView
+    android:fillViewport="true"
+    android:background="#EFEFEF">
+    <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select Blood Group"
-        android:layout_marginLeft="50dp"
-        android:id="@+id/signUpBloodGroup"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_height="match_parent"
 
-    <Spinner
-        android:id="@+id/bloodGroupSpiner"
-        android:layout_marginLeft="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:padding="12dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medilink App"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"
+            android:textColor="#4BD750"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:hint="Your Name"
+            android:ems="15"
+            android:id="@+id/signUpName"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:hint="Your Email"
+            android:ems="15"
+            android:id="@+id/signUpEmail"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:ems="15"
+            android:id="@+id/signUpPass"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="confirm Password"
+            android:inputType="textPassword"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:ems="15"
+            android:id="@+id/confirmSignUpPass"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Your Phone Number"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:ems="15"
+            android:id="@+id/signUpPhone"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:gravity="center_vertical"
+            android:text="Select Blood Group"
 
-        android:dropDownVerticalOffset="12dp" />
+            android:id="@+id/signUpBloodGroup"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Home District"
-        android:ems="15"
-        android:id="@+id/signUpDist"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Your Profession"
-        android:ems="15"
-        android:id="@+id/signUpProfession"
-        android:layout_marginTop="10dp"/>
+        <Spinner
+            android:id="@+id/bloodGroupSpiner"
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="sign up"
-    android:id="@+id/signUpButton"
-    android:layout_marginTop="15dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go for login"
-        android:id="@+id/redirectToLoin"
-        android:layout_marginTop="15dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:padding="12dp"
 
-</LinearLayout>
+            android:dropDownVerticalOffset="12dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:hint="Home District"
+            android:ems="15"
+            android:id="@+id/signUpDist"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D3D1D1"
+            android:hint="Your Profession"
+            android:ems="15"
+            android:id="@+id/signUpProfession"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sign up"
+            android:id="@+id/signUpButton"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go for login"
+            android:id="@+id/redirectToLoin"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
