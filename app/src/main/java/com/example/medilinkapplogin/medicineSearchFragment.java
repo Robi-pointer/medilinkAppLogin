@@ -9,9 +9,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,10 +37,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class medicineSearchFragment extends Fragment {
-    RequestQueue requestQueue;
-    AutoCompleteTextView searchMedicine;
-    Button searchMedicineButton;
-    TextView medicineDetails;
+
+    private WebView webView;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,12 +86,12 @@ public class medicineSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_medicine_search, container, false);
-        searchMedicine = view.findViewById(R.id.searchMedicine);
-        searchMedicineButton = view.findViewById(R.id.searchMedicineButton);
-        medicineDetails = view.findViewById(R.id.medicineDetails);
 
+        webView = view.findViewById(R.id.webView);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
 
-
+        webView.loadUrl("https://medex.com.bd/brands");
 
         return view;
     }
