@@ -33,6 +33,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 parameters.KEY_PHONE + " TEXT, " +
                 parameters.KEY_BLOOD_GROUP + " TEXT, " +
                 parameters.KEY_DIST + " TEXT, " +
+                parameters.KEY_DIABETES + " TEXT, " +
+                parameters.KEY_HEPATITIS + " TEXT, " +
+                parameters.KEY_MEJOR_OPERATION + " TEXT, " +
+                parameters.KEY_HIGH_BLOOD_PRESSURE + " TEXT, " +
+                parameters.KEY_VACCINE + " TEXT, " +
+                parameters.KEY_LAST_DONATION_DATE + " TEXT, " +
                 parameters.KEY_PROFESSION + " TEXT " + ")";
         db.execSQL(create);
 
@@ -55,6 +61,12 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(parameters.KEY_BLOOD_GROUP,data.getBloodGroup());
         values.put(parameters.KEY_DIST,data.getDistrict());
         values.put(parameters.KEY_PROFESSION,data.getProfession());
+        values.put(parameters.KEY_DIABETES,data.getDiabetes());
+        values.put(parameters.KEY_HEPATITIS,data.getHepatitis());
+        values.put(parameters.KEY_MEJOR_OPERATION,data.getOperation());
+        values.put(parameters.KEY_HIGH_BLOOD_PRESSURE,data.getHigh_blood_pressure());
+        values.put(parameters.KEY_VACCINE,data.getVaccine());
+        values.put(parameters.KEY_LAST_DONATION_DATE,data.getDonation_date());
         long result = db.insert(parameters.USER_INFO_TABLE,null,values);
         if(result==-1)
         {
@@ -109,15 +121,19 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(select,new String[]{email});
         if(cursor.moveToFirst())
         {
-            int nameIndex = cursor.getColumnIndexOrThrow("name");
-            int phoneIndex = cursor.getColumnIndexOrThrow("phone_no");
-            int bloodGroupIndex = cursor.getColumnIndexOrThrow("blood_group");
+            String name  = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_NAME));
+            String email1 = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_EMAIL));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_PHONE));
+            String bloodGroup = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_BLOOD_GROUP));
+            String diabetes = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_DIABETES));
+            String hepatitis = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_HEPATITIS));
+            String vaccine = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_VACCINE));
+            String operation = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_MEJOR_OPERATION));
+            String bloodPressure = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_HIGH_BLOOD_PRESSURE));
+            String donationDate = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_LAST_DONATION_DATE));
 
-            String name = cursor.getString(nameIndex);
-            String phone = cursor.getString(phoneIndex);
-            String bloodGroup = cursor.getString(bloodGroupIndex);
             cursor.close();
-            return new userInfo(name,email,phone,bloodGroup);
+            return new  userInfo(name, email, phone,bloodGroup,diabetes,hepatitis,operation,vaccine,donationDate,bloodPressure);
         }
         cursor.close();
         return null;
@@ -138,7 +154,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 String name  = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_NAME));
                 String email = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_EMAIL));
                 String phone = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_PHONE));
-                doners.add(new userInfo(name, email, phone,bloodGroup));
+                String diabetes = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_DIABETES));
+                String hepatitis = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_HEPATITIS));
+                String vaccine = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_VACCINE));
+                String operation = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_MEJOR_OPERATION));
+                String bloodPressure = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_HIGH_BLOOD_PRESSURE));
+                String donationDate = cursor.getString(cursor.getColumnIndexOrThrow(parameters.KEY_LAST_DONATION_DATE));
+                doners.add(new userInfo(name, email, phone,bloodGroup,diabetes,hepatitis,operation,vaccine,donationDate,bloodPressure));
             } while (cursor.moveToNext());
         }
         cursor.close();

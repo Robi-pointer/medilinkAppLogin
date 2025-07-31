@@ -1,11 +1,13 @@
 package com.example.medilinkapplogin;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.example.medilinkapplogin.Database.DBHelper;
 import com.example.medilinkapplogin.userDataModel.dataModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class signUpActivity extends AppCompatActivity {
 
@@ -29,6 +32,9 @@ public class signUpActivity extends AppCompatActivity {
     EditText signUpDist,signUpProfession;
     Button signUpButton;
     TextView redirectToLoin,signUpBloodGroup;
+    CheckBox checkboxDiabetes, checkboxPressure, checkboxHepatitis,checkboxVaccine,checkboxOperation;
+    EditText editDonationDate;
+    Calendar calendar;
     ArrayList<String>arrBloodGroupSpinner = new ArrayList<>();
 
 
@@ -62,6 +68,13 @@ public class signUpActivity extends AppCompatActivity {
         arrBloodGroupSpinner.add("A-");
         arrBloodGroupSpinner.add("B-");
         arrBloodGroupSpinner.add("AB-");
+        checkboxDiabetes = findViewById(R.id.checkboxDiabetes);
+        checkboxPressure = findViewById(R.id.checkboxHighPressure);
+        checkboxHepatitis = findViewById(R.id.checkboxHepatitis);
+        checkboxVaccine = findViewById(R.id.checkboxVaccine);
+        checkboxOperation = findViewById(R.id.checkboxOperation);
+        editDonationDate = findViewById(R.id.editDonationDate);
+        calendar = Calendar.getInstance();
         ArrayAdapter<String>bloodGroupAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrBloodGroupSpinner);
         bloodGroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bloodGroupSpiner.setAdapter(bloodGroupAdapter);
@@ -72,6 +85,19 @@ public class signUpActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        editDonationDate.setOnClickListener(view -> {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog dialog = new DatePickerDialog(signUpActivity.this,
+                    (view1, selectedYear, selectedMonth, selectedDay) -> {
+                        String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+                        editDonationDate.setText(date);
+                    }, year, month, day);
+            dialog.show();
+        });
+
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +109,13 @@ public class signUpActivity extends AppCompatActivity {
                 String bloodGroup = bloodGroupSpiner.getSelectedItem().toString().trim();
                 String dist = signUpDist.getText().toString().trim();
                 String profession = signUpProfession.getText().toString().trim();
+                String diabetes = checkboxDiabetes.isChecked() ? "Yes" : "No";
+                String pressure = checkboxPressure.isChecked() ? "Yes" : "No";
+                String hepatitis = checkboxHepatitis.isChecked() ? "Yes" : "No";
+                String operation = checkboxOperation.isChecked() ? "Yes" : "No";
+                String vaccine = checkboxVaccine.isChecked() ? "Yes" : "No";
+
+                String donationDate = editDonationDate.getText().toString().trim();
 
                if(password != null && password.equals(confirmPassword))
                {
@@ -94,6 +127,12 @@ public class signUpActivity extends AppCompatActivity {
                    dm.setBloodGroup(bloodGroup);
                    dm.setDistrict(dist);
                    dm.setProfession(profession);
+                   dm.setDiabetes(diabetes);
+                   dm.setHigh_blood_pressure(pressure);
+                   dm.setVaccine(vaccine);
+                   dm.setOperation(operation);
+                   dm.setHepatitis(hepatitis);
+                   dm.setDonation_date(donationDate);
                    DBHelper dbHelper = new DBHelper(signUpActivity.this);
                    dbHelper.addUserInfo(dm);
                }

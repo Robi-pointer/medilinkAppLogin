@@ -133,6 +133,76 @@
             android:ems="15"
             android:id="@+id/signUpProfession"
             android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medical Conditions"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp" />
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_gravity="center">
+           <CheckBox
+               android:id="@+id/checkboxDiabetes"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Diabetes"
+               android:layout_marginStart="10dp"/>
+
+           <CheckBox
+               android:id="@+id/checkboxHighPressure"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="High Blood Pressure"
+               android:layout_marginStart="10dp"/>
+           <CheckBox
+               android:id="@+id/checkboxHepatitis"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Hepatitis"
+               android:layout_marginStart="10dp"/>
+
+       </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/checkboxVaccine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vaccinated in last 14 days"
+                android:layout_marginStart="10dp"/>
+
+            <CheckBox
+                android:id="@+id/checkboxOperation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Any Major Operation"
+                android:layout_marginStart="10dp"/>
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/editDonationDate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Select Donation Date"
+            android:background="@drawable/signup_custom_edittext"
+            android:paddingLeft="8dp"
+            android:layout_margin="10dp"
+            android:focusable="false"
+            android:clickable="true"/>
+
+
+
+
+
 
         <Button
             android:layout_width="wrap_content"
