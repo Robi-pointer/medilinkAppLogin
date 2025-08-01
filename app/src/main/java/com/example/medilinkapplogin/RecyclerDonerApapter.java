@@ -53,11 +53,11 @@ public class RecyclerDonerApapter extends RecyclerView.Adapter<RecyclerDonerApap
             public void onClick(View v) {
                 userInfo donor = doners.get(position); // or whatever your list is called
 
-                String message = "Diabetes: " + donor.getDiabetes() + "\n" +
-                        "Pressure: " + donor.getBloodPressure() + "\n" +
+                String message = "Control less Diabetes: " + donor.getDiabetes() + "\n" +
+                        "High Blood Pressure: " + donor.getBloodPressure() + "\n" +
                         "Hepatitis: " + donor.getHepatitis() + "\n" +
-                        "Operation: " + donor.getOperation() + "\n" +
-                        "Vaccine: " + donor.getVaccine() + "\n" +
+                        "Major Operation: " + donor.getOperation() + "\n" +
+                        "Vaccinated in last 14 days: " + donor.getVaccine() + "\n" +
                         "Last Donation: " + donor.getDonationDate();
 
                 new AlertDialog.Builder(context)

@@ -110,7 +110,8 @@ public class userDashBoard extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.container,fragment);
+        ft.replace(R.id.container,fragment);
+        ft.addToBackStack(null);
         ft.commit();
     }
 }

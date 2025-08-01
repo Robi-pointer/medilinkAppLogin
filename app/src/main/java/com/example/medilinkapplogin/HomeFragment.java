@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment {
                         .replace(R.id.container, resultFragment) // R.id.container must be your FrameLayout in activity
                         .addToBackStack(null)              // So that back button goes back to HomeFragment
                         .commit();
+                searchBloodGroup.setText("");
             }
         });
         medicineSearchLayout.setOnClickListener(new View.OnClickListener() {

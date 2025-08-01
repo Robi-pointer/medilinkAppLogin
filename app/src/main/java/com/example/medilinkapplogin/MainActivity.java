@@ -60,9 +60,13 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("email",user.getEmail());
                         intent.putExtra("phone",user.getPhone());
                         startActivity(intent);
+                        loginEmail.setText("");
+                        loginPassword.setText("");
                     }
                     else {
                         Toast.makeText(MainActivity.this, "email and pass don't match", Toast.LENGTH_SHORT).show();
+                        loginEmail.setText("");
+                        loginPassword.setText("");
                     }
                 }
                 else

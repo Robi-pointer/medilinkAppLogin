@@ -116,29 +116,37 @@ public class signUpActivity extends AppCompatActivity {
                 String vaccine = checkboxVaccine.isChecked() ? "Yes" : "No";
 
                 String donationDate = editDonationDate.getText().toString().trim();
+                DBHelper dbHelper = new DBHelper(signUpActivity.this);
+                if(dbHelper.userExists(email)) {
+                    Toast.makeText(signUpActivity.this, "user already exits", Toast.LENGTH_SHORT).show();
+                return;
+                }
+               else
+                {
+                    if(password != null && password.equals(confirmPassword))
+                    {
+                        dataModel dm = new dataModel();
+                        dm.setName(name);
+                        dm.setEmail(email);
+                        dm.setPhone(phone);
+                        dm.setPass(password);
+                        dm.setBloodGroup(bloodGroup);
+                        dm.setDistrict(dist);
+                        dm.setProfession(profession);
+                        dm.setDiabetes(diabetes);
+                        dm.setHigh_blood_pressure(pressure);
+                        dm.setVaccine(vaccine);
+                        dm.setOperation(operation);
+                        dm.setHepatitis(hepatitis);
+                        dm.setDonation_date(donationDate);
 
-               if(password != null && password.equals(confirmPassword))
-               {
-                   dataModel dm = new dataModel();
-                   dm.setName(name);
-                   dm.setEmail(email);
-                   dm.setPhone(phone);
-                   dm.setPass(password);
-                   dm.setBloodGroup(bloodGroup);
-                   dm.setDistrict(dist);
-                   dm.setProfession(profession);
-                   dm.setDiabetes(diabetes);
-                   dm.setHigh_blood_pressure(pressure);
-                   dm.setVaccine(vaccine);
-                   dm.setOperation(operation);
-                   dm.setHepatitis(hepatitis);
-                   dm.setDonation_date(donationDate);
-                   DBHelper dbHelper = new DBHelper(signUpActivity.this);
-                   dbHelper.addUserInfo(dm);
-               }
-               else {
-                   Toast.makeText(signUpActivity.this, "password and confirm password don't match", Toast.LENGTH_SHORT).show();
-               }
+                        dbHelper.addUserInfo(dm);
+                    }
+                    else {
+                        Toast.makeText(signUpActivity.this, "password and confirm password don't match", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
 
 
 
