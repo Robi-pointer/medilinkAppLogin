@@ -86,7 +86,7 @@
             app:cardElevation="15dp"
             android:layout_weight="1">
             <LinearLayout
-                android:id="@+id/medicalReportsLayout"
+                android:id="@+id/BloodRequestLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -103,7 +103,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="medical reports"/>
+                    android:text="see blood request"/>
 
 
 

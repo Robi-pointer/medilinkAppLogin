@@ -59,6 +59,14 @@ public class HomeFragment extends Fragment {
         Button searchBloodGroupButton = view.findViewById(R.id.searchBloodGroupButton);
         LinearLayout medicineSearchLayout = view.findViewById(R.id.medicineSearchLayout);
         LinearLayout prescriptionLayout = view.findViewById(R.id.prescriptionLayout);
+        LinearLayout BloodRequestLayout = view.findViewById(R.id.BloodRequestLayout);
+        BloodRequestLayout.setOnClickListener(v -> {
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, new bloodRequestFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
         prescriptionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,11 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.medilinkapplogin.DBParameters.parameters;
+import com.example.medilinkapplogin.PatientParameter.parameters1;
 import com.example.medilinkapplogin.user.userInfo;
 import com.example.medilinkapplogin.userDataModel.dataModel;
 
@@ -41,13 +43,30 @@ public class DBHelper extends SQLiteOpenHelper {
                 parameters.KEY_LAST_DONATION_DATE + " TEXT, " +
                 parameters.KEY_PROFESSION + " TEXT " + ")";
         db.execSQL(create);
+        String create1 = "CREATE TABLE " + parameters1.PATIENT_INFO_TABLE + "(" +
+                parameters1.KEY_PATIENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                parameters1.KEY_PATIENT_NAME + " TEXT, " +
+                parameters1.KEY_PATIENT_PHONE + " TEXT, " +
+                parameters1.KEY_PATIENT_BLOOD_GROUP + " TEXT, " +
+                parameters1.KEY_DONOR_PHONE + " TEXT " + ")";
+        try {
+            db.execSQL(create1); // your actual SQL here
+            Log.d("DBHelper", "BloodRequest table created successfully");
+        } catch (Exception e) {
+            Log.e("DBHelper", "Error creating table: " + e.getMessage());
+        }
+
+
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + parameters.USER_INFO_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + parameters1.PATIENT_INFO_TABLE);
+
         onCreate(db);
+
 
     }
     public void addUserInfo(dataModel data)

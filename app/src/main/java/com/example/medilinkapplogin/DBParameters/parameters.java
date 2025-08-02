@@ -4,7 +4,7 @@ import android.content.Context;
 
 public class parameters {
     public static final String DATABASE_NAME = "user_info";
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String  USER_INFO_TABLE = "info_table";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";

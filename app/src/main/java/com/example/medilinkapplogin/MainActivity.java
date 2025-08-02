@@ -1,6 +1,8 @@
 package com.example.medilinkapplogin;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +16,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.medilinkapplogin.DBParameters.parameters;
 import com.example.medilinkapplogin.Database.DBHelper;
+import com.example.medilinkapplogin.user.UserSession;
 import com.example.medilinkapplogin.user.userInfo;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,6 +59,29 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if(dbHelper.checkPassword(pass,email))
                     {
+                        SQLiteDatabase db = openOrCreateDatabase("user_info", MODE_PRIVATE, null);
+
+                        Cursor cursor = db.rawQuery(
+                                "SELECT * FROM " + parameters.USER_INFO_TABLE + " WHERE " +
+                                        parameters.KEY_EMAIL + "=? AND " + parameters.KEY_PASS + "=?",
+                                new String[]{email, pass}
+                        );
+
+
+                        if (cursor.moveToFirst()) {
+                            // ✅ Extract user info
+                            int emailIndex = cursor.getColumnIndex("email");
+                            int phoneIndex = cursor.getColumnIndex("phone_no");
+                            int nameIndex = cursor.getColumnIndex("name");
+
+
+                            String name = cursor.getString(nameIndex);
+                            String phone = cursor.getString(phoneIndex);
+                            String mail = cursor.getString(emailIndex);
+
+                            // ✅ Store in global session class
+                            UserSession.getInstance().setUser(name, phone, mail);
+                        }
                         Intent intent = new Intent(MainActivity.this,userDashBoard.class);
                     intent.putExtra("name",user.getName());
                         intent.putExtra("email",user.getEmail());
@@ -62,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         loginEmail.setText("");
                         loginPassword.setText("");
+
                     }
                     else {
                         Toast.makeText(MainActivity.this, "email and pass don't match", Toast.LENGTH_SHORT).show();
